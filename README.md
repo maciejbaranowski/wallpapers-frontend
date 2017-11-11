@@ -1,0 +1,1 @@
+# Tapety cytaty front-end

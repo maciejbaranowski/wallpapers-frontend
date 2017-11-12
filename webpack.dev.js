@@ -3,7 +3,14 @@ var webpack = require("webpack");
 
 module.exports = {
   entry: "./src/index.js",
-  output: { path: __dirname, filename: "bundle.js" },
+  output: {
+    path: __dirname,
+    filename: "bundle.js",
+    publicPath: "/"
+  },
+  devServer: {
+    historyApiFallback: true
+  },
   module: {
     loaders: [
       {

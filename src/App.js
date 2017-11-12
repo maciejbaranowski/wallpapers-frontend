@@ -9,13 +9,13 @@ import { NotFound, Licence, Contact } from "./Static";
 const Home = () => (
   <div>
     <h2>Strona główna</h2>
-    <WallpaperList category="" page="0" searchPhrase="" />
+    <WallpaperList category="all" page="1" searchPhrase="" />
   </div>
 );
 
 const WallpaperListWrapper = match => {
   let category = match.match.params.categoryId ? match.match.params.categoryId : "";
-  let page = match.match.params.pageNo ? match.match.params.pageNo : 0;
+  let page = match.match.params.pageNo ? match.match.params.pageNo : 1;
   let searchPhrase = match.match.params.phrase ? match.match.params.phrase : "";
   return <WallpaperList category={category} page={page} searchPhrase={searchPhrase} />;
 };
@@ -33,7 +33,6 @@ const App = () => (
         <Route path="/image/:imageId" component={FullImage} />
         <Route exact path="/search/:phrase" component={WallpaperListWrapper} />
         <Route exact path="/search/:phrase/:pageNo" component={WallpaperListWrapper} />
-        <Route exact path="/list/" force-refresh component={WallpaperListWrapper} />
         <Route exact path="/list/:categoryId/" force-refresh component={WallpaperListWrapper} />
         <Route exact path="/list/:categoryId/:pageNo" force-refresh component={WallpaperListWrapper} />
         {

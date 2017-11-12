@@ -16,7 +16,7 @@ class WallpaperList extends Component {
 
   fetchData(props) {
     DataProvider.getWallpapers(
-      props.category,
+      props.category == "all" ? "" : props.category,
       props.page * this.state.wallpapersPerPage,
       this.state.wallpapersPerPage,
       this.props.searchPhrase
@@ -67,7 +67,7 @@ class WallpaperList extends Component {
   }
 
   getPreviousPageButton() {
-    if (this.props.page > 0) {
+    if (this.props.page > 1) {
       return (
         <Link className="btn btn-default" to={"/list/" + this.props.category + "/" + (Number(this.props.page) - 1)}>
           Poprzednia strona

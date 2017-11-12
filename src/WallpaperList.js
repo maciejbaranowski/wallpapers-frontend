@@ -52,13 +52,16 @@ class WallpaperList extends Component {
     return this.state.wallpapersNumber / this.state.wallpapersPerPage;
   }
 
+  getBasicUrl() {
+    if (this.props.searchPhrase != "") {
+      return "/search/" + this.props.searchPhrase + "/";
+    }
+    return "/list/" + this.props.category + "/";
+  }
   getNextPageButton() {
     if (this.props.page < this.getNumberOfPages()) {
       return (
-        <Link
-          className="btn btn-default moved-to-right"
-          to={"/list/" + this.props.category + "/" + (Number(this.props.page) + 1)}
-        >
+        <Link className="btn btn-default moved-to-right" to={this.getBasicUrl() + (Number(this.props.page) + 1)}>
           Następna strona
         </Link>
       );
@@ -69,7 +72,7 @@ class WallpaperList extends Component {
   getPreviousPageButton() {
     if (this.props.page > 1) {
       return (
-        <Link className="btn btn-default" to={"/list/" + this.props.category + "/" + (Number(this.props.page) - 1)}>
+        <Link className="btn btn-default" to={this.getBasicUrl() + (Number(this.props.page) - 1)}>
           Poprzednia strona
         </Link>
       );

@@ -45,7 +45,7 @@ export default class Navigation extends Component {
                 onChange={this.handleInput}
               />
             </div>
-            <Link to={"/search/" + this.state.searchPhrase} className="btn btn-default" disabled>
+            <Link to={"/search/" + this.state.searchPhrase} className="btn btn-default">
               Szukaj
             </Link>
           </div>

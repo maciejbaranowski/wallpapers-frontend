@@ -4,6 +4,8 @@
 * Add contact information
 * Add searching by author
 * Implement rating system
+* Add meta tags in index.html
+* Add some content for SEO
 
 ## Back-end part
 * Improve SQL searching for ąźćł-like characters

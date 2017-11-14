@@ -3,7 +3,6 @@
 ## Front-end part
 * Add contact information
 * Add searching by author
-* Implement rating system
 * Add meta tags in index.html
 * Add some content for SEO
 

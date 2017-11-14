@@ -33,6 +33,17 @@ class DataProvider {
       }
     });
   }
+
+  static postVote(index, vote) {
+    console.log("Voted: ", vote, ", on wallpaper: ", index);
+    return axios.post(this.getApiUrl() + "postVote", {
+      crossDomain: true,
+      params: {
+        index,
+        vote
+      }
+    });
+  }
 }
 
 export default DataProvider;

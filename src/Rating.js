@@ -26,9 +26,15 @@ export default class Rating extends Component {
       {character}
     </span>
   );
+
+  getRatingValue = () => {
+    if (this.props.numberOfVotes == 0) return 0;
+    return this.props.sumVotes / this.props.numberOfVotes;
+  };
+
   generateFiveStars() {
     let ratingString = [];
-    let treshold = this.props.value - 0.5;
+    let treshold = this.getRatingValue() - 0.5;
     if (this.state.userChoice !== null && !this.state.alreadyVoted) {
       treshold = this.state.userChoice;
     }
@@ -54,7 +60,7 @@ export default class Rating extends Component {
   render() {
     return (
       <div className="rating-container">
-        {this.generateFiveStars()} | Ocena : {this.props.value.toFixed(2)} (głosów: {this.props.numberOfVotes})
+        {this.generateFiveStars()} | Ocena : {this.getRatingValue().toFixed(2)} (głosów: {this.props.numberOfVotes})
       </div>
     );
   }

@@ -37,10 +37,10 @@ export default class FullImage extends Component {
         <h3>{this.state.wallpaper.quote}</h3>
         <h6>Kategoria: {this.state.wallpaper.category}</h6>
         <Rating
-          value={5}
-          numberOfVotes={400}
+          sumVotes={this.state.wallpaper.sumVotes}
+          numberOfVotes={this.state.wallpaper.noVotes}
           placeVote={i => {
-            console.log("Voted: ", i, ", on wallpaper: ", this.props.data.id);
+            DataProvider.postVote(this.state.wallpaper.id, i);
           }}
         />
         <img

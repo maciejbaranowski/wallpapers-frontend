@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
+import DataProvider from "./DataProvider";
 
 export default class Wallpaper extends Component {
   render() {
@@ -13,10 +14,10 @@ export default class Wallpaper extends Component {
           </Link>
           <h6>Kategoria: {this.props.data.category}</h6>
           <Rating
-            value={Math.random() * 5}
-            numberOfVotes={400}
+            sumVotes={this.props.data.sumVotes}
+            numberOfVotes={this.props.data.noVotes}
             placeVote={i => {
-              console.log("Voted: ", i, ", on wallpaper: ", this.props.data.id);
+              DataProvider.postVote(this.props.data.id, i);
             }}
           />
         </div>

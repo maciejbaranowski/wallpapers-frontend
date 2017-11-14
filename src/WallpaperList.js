@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DataProvider from "./DataProvider";
 import { Link } from "react-router-dom";
 import Wallpaper from "./Wallpaper";
+import { LoadingPane } from "./LoadingPane";
 
 class WallpaperList extends Component {
   constructor(props) {
@@ -90,6 +91,7 @@ class WallpaperList extends Component {
   render() {
     return (
       <div>
+        {!this.state.dataFetched ? <LoadingPane /> : ""}
         <div className="row three-column">
           {this.state.wallpapersList.map((wallpaper, i) => {
             return <Wallpaper key={i} data={wallpaper} index={i} />;

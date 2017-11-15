@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import WallpaperList from "./WallpaperList";
 import CategoriesList from "./CategoriesList";
+import AuthorsList from "./AuthorsList";
 import FullImage from "./FullImage";
 import Navigation from "./Navigation";
 import { NotFound, Licence } from "./Static";
@@ -37,6 +38,7 @@ const App = () => (
         <Route path="/licence" component={Licence} />
         <Route path="/contact" component={Contact} />
         <Route path="/categories" component={CategoriesList} />
+        <Route path="/authors" component={AuthorsList} />
         <Route path="/image/:imageId" component={FullImage} />
         <Route exact path="/search/:phrase" component={WallpaperListWrapper} />
         <Route

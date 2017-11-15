@@ -29,6 +29,9 @@ export default class Navigation extends Component {
               <Link to="/categories">Kategorie</Link>
             </li>
             <li>
+              <Link to="/authors">Autorzy</Link>
+            </li>
+            <li>
               <Link to="/licence">Licencja</Link>
             </li>
             <li>
@@ -45,7 +48,10 @@ export default class Navigation extends Component {
                 onChange={this.handleInput}
               />
             </div>
-            <Link to={"/search/" + this.state.searchPhrase} className="btn btn-default">
+            <Link
+              to={"/search/" + this.state.searchPhrase}
+              className="btn btn-default"
+            >
               Szukaj
             </Link>
           </div>

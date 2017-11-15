@@ -11,6 +11,14 @@ class DataProvider {
     });
   }
 
+  static getAuthorsList() {
+    //TODO: replace with proper request once implemented
+    return axios.get(this.getApiUrl() + "getCategories", {
+      crossDomain: true,
+      params: {}
+    });
+  }
+
   static getWallpaper(index) {
     return axios.get(this.getApiUrl() + "getImages", {
       crossDomain: true,

@@ -44,6 +44,16 @@ class DataProvider {
       }
     });
   }
+
+  static sendMessage(email, content) {
+    console.log(
+      "Would send an e-mail from: ",
+      email,
+      " with: ",
+      content,
+      " if it was actually implemented"
+    );
+  }
 }
 
 export default DataProvider;

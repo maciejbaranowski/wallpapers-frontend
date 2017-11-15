@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import DataProvider from "./DataProvider";
 
 export default class Conatact extends Component {
   constructor() {
@@ -7,26 +8,37 @@ export default class Conatact extends Component {
       messageSent: false
     };
   }
-  sendMessage = () => {
+
+  sendMessage = event => {
+    DataProvider.sendMessage(
+      event.target.emailInput.value,
+      event.target.emailContent.value
+    );
     this.setState({
       messageSent: true
     });
   };
+
   render() {
     if (this.state.messageSent === true)
       return <h2>Wiadomość wysłana, dziękujemy</h2>;
     return (
-      <form>
+      <form onSubmit={this.sendMessage}>
         <h2>Kontakt</h2>
         <div className="form-group">
-          <label>Twój adres E-mail</label>
-          <input type="email" className="form-control" placeholder="Email" />
+          <label htmlFor="emailInput">Twój adres E-mail</label>
+          <input
+            name="emailInput"
+            type="email"
+            className="form-control"
+            placeholder="Email"
+          />
         </div>
         <div className="form-group">
-          <label>Wiadomość</label>
-          <textarea className="form-control" rows="3" />
+          <label htmlFor="emailContent">Wiadomość</label>
+          <textarea name="emailContent" className="form-control" rows="3" />
         </div>
-        <button className="btn btn-default" onClick={this.sendMessage}>
+        <button className="btn btn-default" type="submit">
           Wyślij
         </button>
       </form>

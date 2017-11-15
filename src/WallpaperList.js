@@ -27,7 +27,7 @@ class WallpaperList extends Component {
       .then(response => {
         this.setState({
           wallpapersList: response.data.list.map(wallpaper => {
-            wallpaper.filename = DataProvider.getImagesHost() + wallpaper.filename;
+            wallpaper.filename = DataProvider.getImagesHost() + "/thumbnails/" + wallpaper.filename;
             return wallpaper;
           }),
           dataFetched: true,

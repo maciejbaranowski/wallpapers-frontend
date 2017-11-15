@@ -2,7 +2,6 @@
 
 ## Front-end part
 
-* Add searching by author
 * Add meta tags in index.html
 * Add some content for SEO
 
@@ -20,4 +19,4 @@
 ## Marketing
 
 * Update facebook profile
-* Add some basic ratings to show nice wallpapers firstIdx
+* Connect with facebook to post random wallpaper every day

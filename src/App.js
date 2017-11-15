@@ -5,7 +5,7 @@ import CategoriesList from "./CategoriesList";
 import AuthorsList from "./AuthorsList";
 import FullImage from "./FullImage";
 import Navigation from "./Navigation";
-import { NotFound, Licence } from "./Static";
+import { NotFound, Licence, CopyrightFooter } from "./Static";
 import Contact from "./Contact";
 
 const Home = () => (
@@ -40,6 +40,7 @@ const App = () => (
         <Route exact path="/list/:categoryId/" force-refresh component={WallpaperListWrapper} />
         <Route exact path="/list/:categoryId/:pageNo" force-refresh component={WallpaperListWrapper} />
       </div>
+      <CopyrightFooter />
     </div>
   </Router>
 );

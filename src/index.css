@@ -24,3 +24,11 @@
 .rating-container {
   cursor: default;
 }
+
+.copyright-footer {
+  left: auto;
+  right: auto;
+  text-align: center;
+  width: 100%;
+  bottom: 0px;
+}

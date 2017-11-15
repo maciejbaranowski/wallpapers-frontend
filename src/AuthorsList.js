@@ -14,6 +14,7 @@ class AuthorsList extends Component {
       this.setState({ authors: response.data });
     });
   }
+
   render() {
     return (
       <div>
@@ -21,8 +22,8 @@ class AuthorsList extends Component {
         <ul className="three-column list-group">
           {this.state.authors.map((author, i) => {
             return (
-              <Link key={author.id} to={"list/" + author.id}>
-                <li className="list-group-item">{author.name}</li>
+              <Link key={author.id} to={"author/" + author.author}>
+                <li className="list-group-item">{author.author}</li>
               </Link>
             );
           })}

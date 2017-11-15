@@ -13,7 +13,7 @@ class DataProvider {
 
   static getAuthorsList() {
     //TODO: replace with proper request once implemented
-    return axios.get(this.getApiUrl() + "getCategories", {
+    return axios.get(this.getApiUrl() + "getAuthors", {
       crossDomain: true,
       params: {}
     });

@@ -15,20 +15,11 @@ const Home = () => (
 );
 
 const WallpaperListWrapper = match => {
-  let category = match.match.params.categoryId
-    ? match.match.params.categoryId
-    : "";
+  let category = match.match.params.categoryId ? match.match.params.categoryId : "";
   let page = match.match.params.pageNo ? match.match.params.pageNo : 0;
   let searchPhrase = match.match.params.phrase ? match.match.params.phrase : "";
   let author = match.match.params.author ? match.match.params.author : "";
-  return (
-    <WallpaperList
-      category={category}
-      page={page}
-      searchPhrase={searchPhrase}
-      author={author}
-    />
-  );
+  return <WallpaperList category={category} page={page} searchPhrase={searchPhrase} author={author} />;
 };
 
 const App = () => (
@@ -43,29 +34,11 @@ const App = () => (
         <Route path="/authors" component={AuthorsList} />
         <Route path="/image/:imageId" component={FullImage} />
         <Route exact path="/author/:author" component={WallpaperListWrapper} />
-        <Route
-          exact
-          path="/author/:author/:pageNo"
-          component={WallpaperListWrapper}
-        />
+        <Route exact path="/author/:author/:pageNo" component={WallpaperListWrapper} />
         <Route exact path="/search/:phrase" component={WallpaperListWrapper} />
-        <Route
-          exact
-          path="/search/:phrase/:pageNo"
-          component={WallpaperListWrapper}
-        />
-        <Route
-          exact
-          path="/list/:categoryId/"
-          force-refresh
-          component={WallpaperListWrapper}
-        />
-        <Route
-          exact
-          path="/list/:categoryId/:pageNo"
-          force-refresh
-          component={WallpaperListWrapper}
-        />
+        <Route exact path="/search/:phrase/:pageNo" component={WallpaperListWrapper} />
+        <Route exact path="/list/:categoryId/" force-refresh component={WallpaperListWrapper} />
+        <Route exact path="/list/:categoryId/:pageNo" force-refresh component={WallpaperListWrapper} />
       </div>
     </div>
   </Router>

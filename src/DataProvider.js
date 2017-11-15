@@ -12,7 +12,6 @@ class DataProvider {
   }
 
   static getAuthorsList() {
-    //TODO: replace with proper request once implemented
     return axios.get(this.getApiUrl() + "getAuthors", {
       crossDomain: true,
       params: {}
@@ -30,14 +29,15 @@ class DataProvider {
     });
   }
 
-  static getWallpapers(category, from, number, searchPhrase) {
+  static getWallpapers(category, from, number, searchPhrase, author) {
     return axios.get(this.getApiUrl() + "getImages", {
       crossDomain: true,
       params: {
         firstIdx: from,
         numberOfImgs: number,
         searchPhrase: searchPhrase,
-        category: category
+        category: category,
+        author: author
       }
     });
   }

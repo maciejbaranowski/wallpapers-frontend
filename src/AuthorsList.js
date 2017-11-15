@@ -22,7 +22,7 @@ class AuthorsList extends Component {
         <ul className="three-column list-group">
           {this.state.authors.map((author, i) => {
             return (
-              <Link key={author.id} to={"author/" + author.author}>
+              <Link key={i} to={"author/" + author.author}>
                 <li className="list-group-item">{author.author}</li>
               </Link>
             );

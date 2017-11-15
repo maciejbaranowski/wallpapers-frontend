@@ -10,7 +10,7 @@ import Contact from "./Contact";
 
 const Home = () => (
   <div>
-    <WallpaperList category="all" page="0" searchPhrase="" />
+    <WallpaperList category="all" page="0" searchPhrase="" author="" />
   </div>
 );
 
@@ -20,11 +20,13 @@ const WallpaperListWrapper = match => {
     : "";
   let page = match.match.params.pageNo ? match.match.params.pageNo : 0;
   let searchPhrase = match.match.params.phrase ? match.match.params.phrase : "";
+  let author = match.match.params.author ? match.match.params.author : "";
   return (
     <WallpaperList
       category={category}
       page={page}
       searchPhrase={searchPhrase}
+      author={author}
     />
   );
 };
@@ -40,6 +42,12 @@ const App = () => (
         <Route path="/categories" component={CategoriesList} />
         <Route path="/authors" component={AuthorsList} />
         <Route path="/image/:imageId" component={FullImage} />
+        <Route exact path="/author/:author" component={WallpaperListWrapper} />
+        <Route
+          exact
+          path="/author/:author/:pageNo"
+          component={WallpaperListWrapper}
+        />
         <Route exact path="/search/:phrase" component={WallpaperListWrapper} />
         <Route
           exact

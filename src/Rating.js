@@ -8,6 +8,7 @@ export default class Rating extends Component {
       alreadyVoted: false
     };
   }
+
   generateStar = (i, character) => (
     <span
       key={i}
@@ -57,11 +58,22 @@ export default class Rating extends Component {
   mouseLeave = () => {
     this.setState({ userChoice: null });
   };
+
+  generateRatingHtml = () => {
+    if (this.state.alreadyVoted === true) {
+      return "Dziękujemy za oddanie głosu";
+    }
+    return [
+      this.generateFiveStars(),
+      "| Ocena : ",
+      this.getRatingValue().toFixed(2),
+      "(głosów: ",
+      this.props.numberOfVotes,
+      ")"
+    ];
+  };
+
   render() {
-    return (
-      <div className="rating-container">
-        {this.generateFiveStars()} | Ocena : {this.getRatingValue().toFixed(2)} (głosów: {this.props.numberOfVotes})
-      </div>
-    );
+    return <div className="rating-container">{this.generateRatingHtml()}</div>;
   }
 }

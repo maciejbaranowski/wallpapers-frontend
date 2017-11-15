@@ -3,6 +3,7 @@ import DataProvider from "./DataProvider";
 import { Link } from "react-router-dom";
 import Wallpaper from "./Wallpaper";
 import { LoadingPane } from "./LoadingPane";
+import { isEmptyString } from "./utils";
 
 class WallpaperList extends Component {
   constructor(props) {
@@ -20,7 +21,8 @@ class WallpaperList extends Component {
       props.category == "all" ? "" : props.category,
       props.page * this.state.wallpapersPerPage,
       this.state.wallpapersPerPage,
-      this.props.searchPhrase
+      this.props.searchPhrase,
+      this.props.author
     )
       .then(response => {
         this.setState({
@@ -54,11 +56,15 @@ class WallpaperList extends Component {
   }
 
   getBasicUrl() {
-    if (this.props.searchPhrase != "") {
+    if (!isEmptyString(this.props.searchPhrase)) {
       return "/search/" + this.props.searchPhrase + "/";
+    }
+    if (!isEmptyString(this.props.author)) {
+      return "/author/" + this.props.author + "/";
     }
     return "/list/" + this.props.category + "/";
   }
+
   getNextPageButton() {
     if (this.props.page < this.getNumberOfPages()) {
       return (
@@ -88,9 +94,18 @@ class WallpaperList extends Component {
     return null;
   }
 
+  generateTitle = () => {
+    if (!isEmptyString(this.props.category) && this.props.category != "all")
+      return <h2>Tapety na pulpit z kategorii: {this.props.category}</h2>;
+    if (!isEmptyString(this.props.searchPhrase)) return <h2>Wyniki wyszukiwania: {this.props.searchPhrase}</h2>;
+    if (!isEmptyString(this.props.author)) return <h2>Cytaty autora: {this.props.author}</h2>;
+    return <h2>Strona główna</h2>;
+  };
+
   render() {
     return (
       <div>
+        {this.generateTitle()}
         {!this.state.dataFetched ? <LoadingPane /> : ""}
         <div className="row three-column">
           {this.state.wallpapersList.map((wallpaper, i) => {

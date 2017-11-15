@@ -11,6 +11,13 @@ class DataProvider {
     });
   }
 
+  static getAuthorsList() {
+    return axios.get(this.getApiUrl() + "getAuthors", {
+      crossDomain: true,
+      params: {}
+    });
+  }
+
   static getWallpaper(index) {
     return axios.get(this.getApiUrl() + "getImages", {
       crossDomain: true,
@@ -22,14 +29,15 @@ class DataProvider {
     });
   }
 
-  static getWallpapers(category, from, number, searchPhrase) {
+  static getWallpapers(category, from, number, searchPhrase, author) {
     return axios.get(this.getApiUrl() + "getImages", {
       crossDomain: true,
       params: {
         firstIdx: from,
         numberOfImgs: number,
         searchPhrase: searchPhrase,
-        category: category
+        category: category,
+        author: author
       }
     });
   }
@@ -45,6 +53,16 @@ class DataProvider {
       {
         crossDomain: true
       }
+    );
+  }
+
+  static sendMessage(email, content) {
+    console.log(
+      "Would send an e-mail from: ",
+      email,
+      " with: ",
+      content,
+      " if it was actually implemented"
     );
   }
 }

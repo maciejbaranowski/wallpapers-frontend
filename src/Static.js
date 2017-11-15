@@ -21,9 +21,8 @@ export const Licence = () => (
   </div>
 );
 
-export const Contact = () => (
-  <div>
-    <h2>Kontakt</h2>
-    Strona w budowie
+export const CopyrightFooter = () => (
+  <div className="text-muted copyright-footer">
+    © Designed and owned by <a href="http://bergsoft.pl">BergSoft Maciej Baranowski</a>
   </div>
 );

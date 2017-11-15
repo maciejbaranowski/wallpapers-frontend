@@ -29,6 +29,9 @@ export default class Navigation extends Component {
               <Link to="/categories">Kategorie</Link>
             </li>
             <li>
+              <Link to="/authors">Autorzy</Link>
+            </li>
+            <li>
               <Link to="/licence">Licencja</Link>
             </li>
             <li>

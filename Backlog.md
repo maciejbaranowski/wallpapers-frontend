@@ -12,7 +12,7 @@
 
 ## Content preparation
 * Run python script full-time to get 25k wallpapers
-* Run modified script to get no-author wallpapers
+* Create thumbnails for each wallpaper (1/4 of original dimensions?)
 * Run modified script to get higher-res wallpapers
 
 ## Marketing

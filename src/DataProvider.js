@@ -1,7 +1,8 @@
 import axios from "axios";
 
 class DataProvider {
-  static getApiUrl = () => "https://tapety-backend.herokuapp.com/api/";
+  static getApiUrl = () => "https://tapety-backend.herokuapp.com/api/"; //production
+  //static getApiUrl = () => "http://127.0.0.1:5000/api/"; //local
   static getImagesHost = () => "http://tapetycytaty.pl/";
 
   static getCategoriesList() {
@@ -43,7 +44,6 @@ class DataProvider {
   }
 
   static postVote(index, vote) {
-    console.log("Voted: ", vote, ", on wallpaper: ", index);
     return axios.post(
       this.getApiUrl() + "postVote",
       {
@@ -57,12 +57,15 @@ class DataProvider {
   }
 
   static sendMessage(email, content) {
-    console.log(
-      "Would send an e-mail from: ",
-      email,
-      " with: ",
-      content,
-      " if it was actually implemented"
+    return axios.post(
+      this.getApiUrl() + "sendMessage",
+      {
+        sender: email,
+        content: content
+      },
+      {
+        crossDomain: true
+      }
     );
   }
 }

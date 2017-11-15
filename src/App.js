@@ -9,7 +9,6 @@ import Contact from "./Contact";
 
 const Home = () => (
   <div>
-    <h2>Strona główna</h2>
     <WallpaperList category="all" page="0" searchPhrase="" />
   </div>
 );

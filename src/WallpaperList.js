@@ -25,7 +25,8 @@ class WallpaperList extends Component {
       .then(response => {
         this.setState({
           wallpapersList: response.data.list.map(wallpaper => {
-            wallpaper.filename = DataProvider.getImagesHost() + wallpaper.filename;
+            wallpaper.filename =
+              DataProvider.getImagesHost() + wallpaper.filename;
             return wallpaper;
           }),
           dataFetched: true,
@@ -62,7 +63,10 @@ class WallpaperList extends Component {
   getNextPageButton() {
     if (this.props.page < this.getNumberOfPages()) {
       return (
-        <Link className="btn btn-default moved-to-right" to={this.getBasicUrl() + (Number(this.props.page) + 1)}>
+        <Link
+          className="btn btn-default moved-to-right"
+          to={this.getBasicUrl() + (Number(this.props.page) + 1)}
+        >
           Następna strona
         </Link>
       );
@@ -73,7 +77,10 @@ class WallpaperList extends Component {
   getPreviousPageButton() {
     if (this.props.page > 1) {
       return (
-        <Link className="btn btn-default" to={this.getBasicUrl() + (Number(this.props.page) - 1)}>
+        <Link
+          className="btn btn-default"
+          to={this.getBasicUrl() + (Number(this.props.page) - 1)}
+        >
           Poprzednia strona
         </Link>
       );
@@ -82,15 +89,27 @@ class WallpaperList extends Component {
   }
 
   conditionallyShowNothingFound() {
-    if (this.state.wallpapersList.length === 0 && this.state.dataFetched === true) {
+    if (
+      this.state.wallpapersList.length === 0 &&
+      this.state.dataFetched === true
+    ) {
       return <p>Nie znaleziono tapet spełniających podane kryteria</p>;
     }
     return null;
   }
 
+  generateTitle = () => {
+    if (this.props.category != "" && this.props.category != "all")
+      return <h2>Tapety na pulpit z kategorii: {this.props.category}</h2>;
+    if (this.props.searchPhrase != "")
+      return <h2>Wyniki wyszukiwania: {this.props.searchPhrase}</h2>;
+    return <h2>Strona główna</h2>;
+  };
+
   render() {
     return (
       <div>
+        {this.generateTitle()}
         {!this.state.dataFetched ? <LoadingPane /> : ""}
         <div className="row three-column">
           {this.state.wallpapersList.map((wallpaper, i) => {

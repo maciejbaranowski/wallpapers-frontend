@@ -23,7 +23,5 @@
 
 ## Bugs
 
-* Image displayed in single-view sometimmes differs from multi-view (in single view equal to row-id in database)
-* Search works only after double-click
 * nextpage and previouspage buttons appear in wrong moments
 * Categories are sometimes displayes by id rather than human-readable form

@@ -21,8 +21,8 @@ class WallpaperList extends Component {
       props.category == "all" ? "" : props.category,
       props.page * this.state.wallpapersPerPage,
       this.state.wallpapersPerPage,
-      this.props.searchPhrase,
-      this.props.author
+      props.searchPhrase,
+      props.author
     )
       .then(response => {
         this.setState({
@@ -66,7 +66,7 @@ class WallpaperList extends Component {
   }
 
   getNextPageButton() {
-    if (this.props.page < this.getNumberOfPages()) {
+    if (this.props.page < this.getNumberOfPages() - 1) {
       return (
         <Link className="btn btn-default moved-to-right" to={this.getBasicUrl() + (Number(this.props.page) + 1)}>
           Następna strona
@@ -77,7 +77,7 @@ class WallpaperList extends Component {
   }
 
   getPreviousPageButton() {
-    if (this.props.page > 1) {
+    if (this.props.page >= 1) {
       return (
         <Link className="btn btn-default" to={this.getBasicUrl() + (Number(this.props.page) - 1)}>
           Poprzednia strona

@@ -20,12 +20,10 @@ class DataProvider {
   }
 
   static getWallpaper(index) {
-    return axios.get(this.getApiUrl() + "getImages", {
+    return axios.get(this.getApiUrl() + "getImage", {
       crossDomain: true,
       params: {
-        firstIdx: index - 1,
-        numberOfImgs: 1,
-        searchPhrase: ""
+        id: index
       }
     });
   }

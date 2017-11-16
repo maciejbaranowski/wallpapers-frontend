@@ -11,10 +11,7 @@ export default class FullImage extends Component {
   componentDidMount() {
     DataProvider.getWallpaper(this.props.match.params.imageId).then(response => {
       this.setState({
-        wallpaper: response.data.list.map(wallpaper => {
-          wallpaper.filename = DataProvider.getImagesHost() + wallpaper.filename;
-          return wallpaper;
-        })[0]
+        wallpaper: response.data
       });
     });
   }
@@ -22,7 +19,7 @@ export default class FullImage extends Component {
   render() {
     return (
       <div>
-        <a href={this.state.wallpaper.filename} className="btn btn-primary" download>
+        <a href={DataProvider.getImagesHost() + this.state.wallpaper.filename} className="btn btn-primary" download>
           Pobierz tapetę (jakość HD 1920x1080)
         </a>
         <div
@@ -44,7 +41,7 @@ export default class FullImage extends Component {
           }}
         />
         <img
-          src={this.state.wallpaper.filename}
+          src={DataProvider.getImagesHost() + this.state.wallpaper.filename}
           alt={this.state.wallpaper.quote}
           className="img-responsive img-thumbnail"
         />

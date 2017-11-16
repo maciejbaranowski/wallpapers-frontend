@@ -12,7 +12,7 @@ export default class Wallpaper extends Component {
             <h4>{this.props.data.quote}</h4>
             <img src={this.props.data.filename} alt={this.props.data.quote} className="img-responsive img-thumbnail" />
           </Link>
-          <h6>Kategoria: {this.props.data.category}</h6>
+          <h6>Kategoria: {this.props.data.categoryName}</h6>
           <Rating
             sumVotes={this.props.data.sumVotes}
             numberOfVotes={this.props.data.noVotes}

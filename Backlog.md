@@ -23,5 +23,4 @@
 
 ## Bugs
 
-* nextpage and previouspage buttons appear in wrong moments
 * Categories are sometimes displayes by id rather than human-readable form

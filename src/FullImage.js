@@ -32,7 +32,7 @@ export default class FullImage extends Component {
           Powrót
         </div>
         <h3>{this.state.wallpaper.quote}</h3>
-        <h6>Kategoria: {this.state.wallpaper.category}</h6>
+        <h6>Kategoria: {this.state.wallpaper.categoryName}</h6>
         <Rating
           sumVotes={this.state.wallpaper.sumVotes}
           numberOfVotes={this.state.wallpaper.noVotes}

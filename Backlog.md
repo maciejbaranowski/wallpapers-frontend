@@ -4,20 +4,19 @@
 
 * Add meta tags in index.html
 * Add some content for SEO
+* Replace title tag when changing site
 
 ## Back-end part
 
-* Improve SQL searching for ąźćł-like characters
-* Add sending e-mails on contact
-
 ## Content preparation
 
+* Prepare local version for quick voting (go to next after vote in FullImage view)
+* Go through all wallpapers and vote them. Then delete those that have little to no value (task for Ola?)
 * Run modified script to get higher-res wallpapers
 
 ## Marketing
 
 * Update facebook profile
-* Connect with facebook to post random wallpaper every day
 
 ## Bugs
 

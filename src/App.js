@@ -7,6 +7,7 @@ import FullImage from "./FullImage";
 import Navigation from "./Navigation";
 import { NotFound, Licence, CopyrightFooter } from "./Static";
 import Contact from "./Contact";
+import PopularCategories from "./PopularCategories";
 
 import ReactGA from "react-ga";
 ReactGA.initialize("UA-109847829-2");
@@ -18,6 +19,7 @@ const reportAnalytics = () => {
 
 const Home = () => (
   <div>
+    <PopularCategories />
     <WallpaperList category="all" page="0" searchPhrase="" author="" />
   </div>
 );

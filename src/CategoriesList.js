@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import DataProvider from "./DataProvider";
+import PopularCategories from "./PopularCategories";
 
 class CategoriesList extends Component {
   constructor() {
@@ -17,7 +18,8 @@ class CategoriesList extends Component {
   render() {
     return (
       <div>
-        <h2>Kategorie</h2>
+        <PopularCategories />
+        <h2>Pozostałe Kategorie</h2>
         <ul className="three-column list-group">
           {this.state.categories.map((category, i) => {
             return (

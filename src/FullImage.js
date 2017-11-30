@@ -13,6 +13,7 @@ export default class FullImage extends Component {
       this.setState({
         wallpaper: response.data
       });
+      document.title = response.data.quote + " - TapetyCytaty";
     });
   }
 

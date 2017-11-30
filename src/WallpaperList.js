@@ -33,6 +33,8 @@ class WallpaperList extends Component {
           dataFetched: true,
           wallpapersNumber: response.data.count
         });
+        console.log(this.generateTitle());
+        document.title = String(this.generateTitle().props.children) + " - TapetyCytaty";
       })
       .catch(error => {
         console.log(error);

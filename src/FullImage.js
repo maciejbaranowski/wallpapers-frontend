@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import DataProvider from "./DataProvider";
 import Rating from "./Rating";
+import { setPageTitle } from "./utils";
+
 export default class FullImage extends Component {
   constructor() {
     super();
@@ -13,8 +15,11 @@ export default class FullImage extends Component {
       this.setState({
         wallpaper: response.data
       });
-      document.title = response.data.quote + " - TapetyCytaty";
+      setPageTitle(response.data.quote);
     });
+  }
+  componentWillUnmount() {
+    setPageTitle();
   }
 
   render() {

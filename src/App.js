@@ -25,7 +25,6 @@ const WallpaperListWrapper = match => {
 const App = () => (
   <Router>
     <div className="container unselectable">
-      <Navigation />
       <div className="well">
         <Route exact path="/" component={Home} />
         <Route path="/licence" component={Licence} />

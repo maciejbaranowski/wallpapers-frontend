@@ -8,6 +8,14 @@ import Navigation from "./Navigation";
 import { NotFound, Licence, CopyrightFooter } from "./Static";
 import Contact from "./Contact";
 
+import ReactGA from "react-ga";
+ReactGA.initialize("UA-109847829-2");
+
+const reportAnalytics = () => {
+  ReactGA.pageview(window.location.pathname + window.location.search);
+  return null;
+};
+
 const Home = () => (
   <div>
     <WallpaperList category="all" page="0" searchPhrase="" author="" />
@@ -27,6 +35,7 @@ const App = () => (
     <div className="container unselectable">
       <Navigation />
       <div className="well">
+        <Route component={reportAnalytics} />
         <Route exact path="/" component={Home} />
         <Route path="/licence" component={Licence} />
         <Route path="/contact" component={Contact} />

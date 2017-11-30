@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import DataProvider from "./DataProvider";
 import Rating from "./Rating";
+
 export default class FullImage extends Component {
   constructor() {
     super();
@@ -38,6 +39,7 @@ export default class FullImage extends Component {
           numberOfVotes={this.state.wallpaper.noVotes}
           placeVote={i => {
             DataProvider.postVote(this.state.wallpaper.id, i);
+            window.location.replace("/image/" + (parseInt(this.state.wallpaper.id) + 1));
           }}
         />
         <img

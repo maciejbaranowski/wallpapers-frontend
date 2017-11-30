@@ -11,6 +11,9 @@ export default class FullImage extends Component {
   }
   componentDidMount() {
     DataProvider.getWallpaper(this.props.match.params.imageId).then(response => {
+      if (isNaN(response.data.id) || response.data.noVotes > 0) {
+        window.location.href = "/image/" + (parseInt(this.props.match.params.imageId) + 1);
+      }
       this.setState({
         wallpaper: response.data
       });
@@ -26,7 +29,7 @@ export default class FullImage extends Component {
           numberOfVotes={this.state.wallpaper.noVotes}
           placeVote={i => {
             DataProvider.postVote(this.state.wallpaper.id, i);
-            window.location.replace("/image/" + (parseInt(this.state.wallpaper.id) + 1));
+            window.location.href = "/image/" + (parseInt(this.props.match.params.imageId) + 1);
           }}
         />
         <img

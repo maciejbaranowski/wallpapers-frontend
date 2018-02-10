@@ -17,6 +17,19 @@ const reportAnalytics = () => {
   return null;
 };
 
+const canonicalSetter = () => {
+  let oldLinks = document.getElementsByTagName("link");
+  console.log(oldLinks);
+  Array.from(oldLinks).forEach(e => {
+    if (e.rel === "canonical") {
+      e.parentNode.removeChild(e);
+    }
+  });
+  let linkTag = document.createElement("link");
+  linkTag.rel = "canonical";
+  linkTag.href = window.location;
+  return null;
+};
 const Home = () => (
   <div>
     <PopularCategories />
@@ -37,6 +50,7 @@ const App = () => (
     <div className="container unselectable">
       <Navigation />
       <div className="well">
+        <Route component={canonicalSetter} />
         <Route component={reportAnalytics} />
         <Route exact path="/" component={Home} />
         <Route path="/licence" component={Licence} />

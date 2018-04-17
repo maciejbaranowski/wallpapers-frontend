@@ -19,7 +19,6 @@ const reportAnalytics = () => {
 
 const canonicalSetter = () => {
   let oldLinks = document.getElementsByTagName("link");
-  console.log(oldLinks);
   Array.from(oldLinks).forEach(e => {
     if (e.rel === "canonical") {
       e.parentNode.removeChild(e);
@@ -28,6 +27,7 @@ const canonicalSetter = () => {
   let linkTag = document.createElement("link");
   linkTag.rel = "canonical";
   linkTag.href = window.location;
+  document.getElementsByTagName("head")[0].appendChild(linkTag);
   return null;
 };
 const Home = () => (

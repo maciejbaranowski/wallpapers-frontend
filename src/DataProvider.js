@@ -1,4 +1,5 @@
 import axios from "axios";
+import jsonp from "jsonp";
 
 class DataProvider {
   static getApiUrl = () => "http://tapetycytaty.pl/api/";
@@ -68,6 +69,17 @@ class DataProvider {
         crossDomain: true
       }
     );
+  }
+
+  static getWikiDescription(text) {
+    return new Promise((resolve,reject) => {
+      jsonp("https://pl.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=" + text,
+            null,
+            (err, data) => {
+              console.log(data);
+              resolve(data);
+            });
+    });
   }
 }
 

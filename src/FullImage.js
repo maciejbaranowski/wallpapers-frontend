@@ -7,7 +7,8 @@ export default class FullImage extends Component {
   constructor() {
     super();
     this.state = {
-      wallpaper: {}
+      wallpaper: {},
+      description: ""
     };
   }
   componentDidMount() {
@@ -15,7 +16,13 @@ export default class FullImage extends Component {
       this.setState({
         wallpaper: response.data
       });
-      setPageTitle(response.data.quote);
+      setPageTitle(response.data.quote);      
+      DataProvider.getWikiDescription(this.state.wallpaper.author).then(response => {
+        const pageId = Object.keys(response.query.pages)[0];
+        this.setState({
+          description: response.query.pages[pageId].extract
+        });
+      })
     });
   }
   componentWillUnmount() {
@@ -51,6 +58,8 @@ export default class FullImage extends Component {
           alt={this.state.wallpaper.quote}
           className="img-responsive img-thumbnail"
         />
+        <h4>O autorze cytatu:</h4>
+        <div>{this.state.description}</div>
       </div>
     );
   }

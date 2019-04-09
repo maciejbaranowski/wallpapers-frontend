@@ -1,8 +1,8 @@
 import axios from "axios";
 
 class DataProvider {
-  static getApiUrl = () => "http://tapetycytaty.pl/api/";
-  static getImagesHost = () => "http://tapetycytaty.pl/";
+  static getApiUrl = () => "https://tapetycytaty.pl/api/";
+  static getImagesHost = () => "https://tapetycytaty.pl/";
 
   static getCategoriesList() {
     return axios.get(this.getApiUrl() + "getCategories.php", {

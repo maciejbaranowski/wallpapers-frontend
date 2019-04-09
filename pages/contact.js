@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import DataProvider from "./DataProvider";
+import DataProvider from "../components/DataProvider";
 
-export default class Conatact extends Component {
+export default class Contact extends Component {
   constructor() {
     super();
     this.state = {
@@ -23,6 +23,7 @@ export default class Conatact extends Component {
     if (this.state.messageSent === true)
       return <h2>Wiadomość wysłana, dziękujemy</h2>;
     return (
+      
       <form onSubmit={this.sendMessage}>
         <h2>Kontakt</h2>
         <div className="form-group">
@@ -42,6 +43,7 @@ export default class Conatact extends Component {
           Wyślij
         </button>
       </form>
+      
     );
   }
 }

@@ -1,13 +1,6 @@
-import React from "react";
+import React from 'react'
 
-export const NotFound = () => (
-  <div>
-    <h2>Nie znaleziono</h2>
-    Niepoprawny adres URL!
-  </div>
-);
-
-export const Licence = () => (
+const Licence = () => (
   <div>
     <h2>Licencje</h2>
     <p>
@@ -21,8 +14,4 @@ export const Licence = () => (
   </div>
 );
 
-export const CopyrightFooter = () => (
-  <div className="text-muted copyright-footer">
-    © Designed and owned by <a href="http://bergsoft.pl">BergSoft Maciej Baranowski</a>
-  </div>
-);
+export default Licence;

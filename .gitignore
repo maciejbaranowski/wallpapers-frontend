@@ -3,10 +3,13 @@
 # dependencies
 /node_modules
 
+# testing
+/coverage
+
 # production
 /build
-bundle.js
-webpack-stats.json
+/dist
+/.next
 
 # misc
 .DS_Store

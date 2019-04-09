@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 export default class Navigation extends Component {
   constructor() {
@@ -23,19 +23,19 @@ export default class Navigation extends Component {
         <div className="container-fluid">
           <ul className="nav navbar-nav">
             <li>
-              <Link to="/">Strona główna</Link>
+              <Link href="/"><a>Strona główna</a></Link>
             </li>
             <li>
-              <Link to="/categories">Kategorie</Link>
+              <Link href="/categories"><a>Kategorie</a></Link>
             </li>
             <li>
-              <Link to="/authors">Autorzy</Link>
+              <Link href="/authors"><a>Autorzy</a></Link>
             </li>
             <li>
-              <Link to="/licence">Licencja</Link>
+              <Link href="/licence"><a>Licencja</a></Link>
             </li>
             <li>
-              <Link to="/contact">Kontakt</Link>
+              <Link href="/contact"><a>Kontakt</a></Link>
             </li>
           </ul>
           <div className="navbar-form navbar-left">
@@ -48,8 +48,8 @@ export default class Navigation extends Component {
                 onChange={this.handleInput}
               />
             </div>
-            <Link to={"/search/" + this.state.searchPhrase} className="btn btn-default">
-              Szukaj
+            <Link href={"/?searchPhrase=" + this.state.searchPhrase}>
+              <a className="btn btn-default">Szukaj</a>
             </Link>
           </div>
         </div>

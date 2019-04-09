@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import DataProvider from "./DataProvider";
 
 class AuthorsList extends Component {
@@ -20,9 +20,9 @@ class AuthorsList extends Component {
       <div>
         <h2>Cytaty wg autorów</h2>
         <ul className="three-column list-group">
-          {this.state.authors.map((author, i) => {
+          {this.props.authors.map((author, i) => {
             return (
-              <Link key={i} to={"author/" + author.author}>
+              <Link key={i} href={"/?author=" + author.author}>
                 <li className="list-group-item">{author.author}</li>
               </Link>
             );

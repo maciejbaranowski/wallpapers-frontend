@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import DataProvider from "./DataProvider";
 
 class PopularCategories extends Component {
@@ -28,8 +28,8 @@ class PopularCategories extends Component {
         <ul className="three-column list-group">
           {this.categories.map((category, i) => {
             return (
-              <Link key={category.id} to={"list/" + category.id}>
-                <li className="list-group-item">{category.name}</li>
+              <Link key={category.id} href={"/?category=" + category.id}>
+                <a><li className="list-group-item">{category.name}</li></a>
               </Link>
             );
           })}

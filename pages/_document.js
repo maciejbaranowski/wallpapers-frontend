@@ -17,6 +17,13 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <script>
+              {`(adsbygoogle = window.adsbygoogle || []).push({
+                    google_ad_client: "ca-pub-2855266633887827",
+                    enable_page_level_ads: true
+              });`}
+          </script>
         </body>
       </Html>
     );

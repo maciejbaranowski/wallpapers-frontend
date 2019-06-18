@@ -42,7 +42,7 @@ class WallpaperList extends Component {
   getPreviousPageButton() {
     if (this.props.page >= 1) {
       return (
-        <Link href={this.getBasicUrl() + (Number(this.props.page) - 1)}>
+        <Link href={this.getBasicUrl() + "&page=" + (Number(this.props.page) - 1)}>
           <a className="btn btn-default">Poprzednia strona</a>
         </Link>
       );

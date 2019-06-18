@@ -18,7 +18,8 @@ const Index = withRouter((props) => {
 });
 
 Index.getInitialProps = async function (context) {
-  const data = await DataProvider.getWallpapers(context.query.category, context.query.page, 10, context.query.searchPhrase, context.query.author);
+  const page = context.query.page || 0;
+  const data = await DataProvider.getWallpapers(context.query.category, page * 10, 10, context.query.searchPhrase, context.query.author);
   return {
     wallpapersList: data
       .data

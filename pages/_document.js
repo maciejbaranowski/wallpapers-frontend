@@ -11,11 +11,10 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <script>
-                {`(adsbygoogle = window.adsbygoogle || []).push({
-                      google_ad_client: "ca-pub-2855266633887827",
-                      enable_page_level_ads: true
-                });`}
+          <script dangerouslySetInnerHTML={{ __html: `(adsbygoogle = window.adsbygoogle || []).push({
+                    google_ad_client: "ca-pub-2855266633887827",
+                    enable_page_level_ads: true
+              });` }}>
           </script>
           <link href="/static/bootstrap.min.css" rel="stylesheet"/>
           <link href="/static/index.css" rel="stylesheet"/>

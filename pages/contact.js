@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import CustomHead from "../components/CustomHead"
 import DataProvider from "../components/DataProvider";
 
 export default class Contact extends Component {
@@ -25,6 +26,10 @@ export default class Contact extends Component {
     return (
       
       <form onSubmit={this.sendMessage}>
+      
+        <CustomHead 
+          title="Kontakt"
+        />
         <h2>Kontakt</h2>
         <div className="form-group">
           <label htmlFor="emailInput">Twój adres E-mail</label>

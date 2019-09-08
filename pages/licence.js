@@ -1,8 +1,12 @@
 import React from 'react'
+import CustomHead from "../components/CustomHead"
 
 const Licence = () => (
   <div>
-    <h2>Licencje</h2>
+    <CustomHead 
+      title="Informacje licencyjne"
+    />
+    <h2>Informacje licencyjne</h2>
     <p>
       Wszystkie obrazy udostępnione na tej stronie zostały wykonane osobiście przez autora stron na bazie fotografii
       udostępnianych na licencji Creative Commons Zero oraz cytatów pozyskanych ze żródeł literaturowych.

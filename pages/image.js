@@ -1,4 +1,5 @@
 import React from "react";
+import CustomHead from "../components/CustomHead"
 import DataProvider from "../components/DataProvider";
 import Rating from "../components/Rating";
 import { setPageTitle } from "../components/utils";
@@ -23,6 +24,11 @@ export default class Image extends React.Component {
   render() {
     return (
       <div>
+        <CustomHead 
+          title={this.props.wallpaper.quote}
+          keywords={`${this.props.wallpaper.author},${this.props.wallpaper.categoryName}`}
+          description={`Cytat ${this.props.wallpaper.author}, kategoria ${this.props.wallpaper.categoryName} - ${this.props.wallpaper.quote}`}
+        />
         <a href={DataProvider.getImagesHost() + this.props.wallpaper.filename} className="btn btn-primary" download>
           Pobierz tapetę (jakość HD 1920x1080)
         </a>

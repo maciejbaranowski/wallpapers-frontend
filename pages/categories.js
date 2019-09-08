@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Link from "next/link";
+import CustomHead from "../components/CustomHead"
 import DataProvider from "../components/DataProvider";
 import PopularCategories from "../components/PopularCategories";
 
@@ -14,6 +15,10 @@ class Categories extends Component {
   render() {
     return (
       <div>
+        <CustomHead 
+          title="Kategorie cytatów"
+          description="Kategorie cytatów"
+          />
         <PopularCategories />
         <h2>Pozostałe Kategorie</h2>
         <ul className="three-column list-group">

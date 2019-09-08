@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Link from "next/link";
+import CustomHead from "../components/CustomHead"
 import Wallpaper from "./Wallpaper";
 import { LoadingPane } from "./LoadingPane";
-import { isEmptyString, setPageTitle } from "./utils";
+import { isEmptyString } from "./utils";
 
 class WallpaperList extends Component {
   static defaultProps = {
@@ -57,14 +58,6 @@ class WallpaperList extends Component {
     return null;
   }
 
-  componentDidMount() {
-    setPageTitle(this.generateTitle());
-  }
-  
-  componentWillUnmount() {
-    setPageTitle();
-  }
-
   generateTitle = () => {
     if (!isEmptyString(this.props.category) && this.props.category != "all")
       return "Tapety na pulpit z kategorii: " + this.props.category;
@@ -75,7 +68,12 @@ class WallpaperList extends Component {
 
   render() {
     return (
-      <div>
+      <div>  
+        <CustomHead 
+          title={this.generateTitle()}
+          keywords={`${this.props.category},${this.props.author}`}
+          description={this.generateTitle()}
+        />
         <h2>{this.generateTitle()}</h2>
         {!this.props.dataFetched ? <LoadingPane /> : ""}
         <div className="row three-column">

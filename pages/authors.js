@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Link from "next/link";
+import CustomHead from "../components/CustomHead"
 import DataProvider from "../components/DataProvider";
 
 class AuthorsList extends Component {
@@ -13,6 +14,11 @@ class AuthorsList extends Component {
   render() {
     return (
       <div>
+        <CustomHead 
+          title="Cytaty wg autorów"
+          keywords=""
+          description="Lista autorów"
+          />
         <h2>Cytaty wg autorów</h2>
         <ul className="three-column list-group">
           {this.props.authors.map((author, i) => {

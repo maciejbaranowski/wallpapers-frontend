@@ -2,7 +2,6 @@ import React from "react";
 import CustomHead from "../components/CustomHead"
 import DataProvider from "../components/DataProvider";
 import Rating from "../components/Rating";
-import { setPageTitle } from "../components/utils";
 
 export default class Image extends React.Component {
   static getInitialProps = async function (query) {
@@ -13,14 +12,6 @@ export default class Image extends React.Component {
       description: description
     }
   }
-
-  componentDidMount() {
-    setPageTitle(this.props.wallpaper.quote);
-  }
-  componentWillUnmount() {
-    setPageTitle();
-  }
-
   render() {
     return (
       <div>

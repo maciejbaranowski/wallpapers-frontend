@@ -8,9 +8,10 @@
     "dev": "node server/server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server/server.js",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "test": "jest"
   },
-  "author": "",
+  "author": "Maciej Baranowski",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.1",
@@ -21,5 +22,10 @@
     "react-ga": "^2.5.7",
     "react-transition-group": "^2.9.0"
   },
-  "homepage": "http://tapetycytaty.pl"
+  "homepage": "http://tapetycytaty.pl",
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "babel-jest": "^24.9.0",
+    "jest": "^24.9.0"
+  }
 }

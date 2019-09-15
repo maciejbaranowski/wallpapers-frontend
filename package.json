@@ -16,10 +16,10 @@
   "dependencies": {
     "axios": "^0.18.1",
     "express": "^4.17.1",
-    "next": "^8.0.4",
+    "next": "^8.1.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-ga": "^2.5.7",
+    "react-ga": "^2.6.0",
     "react-transition-group": "^2.9.0"
   },
   "homepage": "http://tapetycytaty.pl",

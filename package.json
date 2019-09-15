@@ -20,11 +20,11 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-ga": "^2.6.0",
-    "react-transition-group": "^2.9.0"
+    "react-transition-group": "^2.9.0",
+    "@babel/core": "^7.6.0"
   },
   "homepage": "http://tapetycytaty.pl",
   "devDependencies": {
-    "@babel/core": "^7.6.0",
     "babel-jest": "^24.9.0",
     "jest": "^24.9.0",
     "react-test-renderer": "^16.9.0"

@@ -28,15 +28,22 @@ class DataProvider {
   }
 
   static getWallpapers(category, from, number, searchPhrase, author) {
-    return axios.get(this.getApiUrl() + "getImages.php", {
-      crossDomain: true,
-      params: {
-        firstIdx: from,
-        numberOfImgs: number,
-        searchPhrase: searchPhrase,
-        category: category,
-        author: author
-      }
+    return new Promise(async (resolve, reject) => {
+      const data = await axios.get(this.getApiUrl() + "getImages.php", {
+        crossDomain: true,
+        params: {
+          firstIdx: from,
+          numberOfImgs: number,
+          searchPhrase: searchPhrase,
+          category: category,
+          author: author
+        }
+      });
+      const wallpapers = data.data.list.map(wallpaper => {
+        wallpaper.filename = DataProvider.getImagesHost() + "thumbnails/" + wallpaper.filename;
+        return wallpaper;
+      });
+      resolve({wallpapers, count: data.data.count});
     });
   }
 

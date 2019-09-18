@@ -2,14 +2,19 @@ import React from "react";
 import CustomHead from "../components/CustomHead"
 import DataProvider from "../components/DataProvider";
 import Rating from "../components/Rating";
+import Wallpaper from "../components/Wallpaper";
+import { randomSelection } from "../components/utils";
 
 export default class Image extends React.Component {
   static getInitialProps = async function (query) {
     const wallpaper = await DataProvider.getWallpaper(query.query.id);
     const description = await DataProvider.getWikiDescription(wallpaper.data.author);
+    const similarWallpapers = await DataProvider.getWallpapers(wallpaper.data.category, 0, 10);
+
     return {
       wallpaper: wallpaper.data,
-      description: description
+      description,
+      similarWallpapers: randomSelection(similarWallpapers.wallpapers, 6)
     }
   }
   render() {
@@ -46,6 +51,13 @@ export default class Image extends React.Component {
           alt={this.props.wallpaper.quote}
           className="img-responsive img-thumbnail"
         />
+        <hr />
+        <h3>Inne z tej kategorii</h3>
+        <div className="row three-column">
+          {this.props.similarWallpapers.map((wallpaper, i) => {
+            return <Wallpaper key={i} data={wallpaper} index={i} />;
+          })}
+        </div>
         <h4>O autorze cytatu:</h4>
         <div>{this.props.description}</div>
       </div>

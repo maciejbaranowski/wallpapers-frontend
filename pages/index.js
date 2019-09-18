@@ -21,15 +21,9 @@ Index.getInitialProps = async function (context) {
   const page = context.query.page || 0;
   const data = await DataProvider.getWallpapers(context.query.category, page * 10, 10, context.query.searchPhrase, context.query.author);
   return {
-    wallpapersList: data
-      .data
-      .list
-      .map(wallpaper => {
-        wallpaper.filename = DataProvider.getImagesHost() + "thumbnails/" + wallpaper.filename;
-        return wallpaper;
-      }),
+    wallpapersList: data.wallpapers,
     dataFetched: true,
-    wallpapersNumber: data.data.count
+    wallpapersNumber: data.count
   }
 }
 export default Index;

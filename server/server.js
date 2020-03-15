@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 3000
 const dev = process.env.NODE_DEV !== 'production'
 const nextApp = next({ dev })
 const handle = nextApp.getRequestHandler()
+const loader = require("./loader")
 
 nextApp.prepare().then(() => {
     const app = express();
@@ -17,7 +18,7 @@ nextApp.prepare().then(() => {
         params: {
           password: req.query.password
         }
-      }).then((data) => {
+      }).then((data) => {``
         if (data.data == "1") {
           next()
         } else {
@@ -26,6 +27,11 @@ nextApp.prepare().then(() => {
       }).catch((err) => {
         console.log(err);
       });
+    })
+    app.get('/admin/quotes*', (req,res) => {
+      loader(req.query.author).then((data) => {
+        res.send(data);
+      }).catch(e => console.log(e));
     })
     app.get('/*', (req,res) => {
       return handle(req,res);

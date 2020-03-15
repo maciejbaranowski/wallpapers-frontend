@@ -13,14 +13,15 @@
   "author": "Maciej Baranowski",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.6.0",
     "axios": "^0.18.1",
     "express": "^4.17.1",
+    "jsdom": "^16.2.1",
     "next": "^8.1.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-ga": "^2.6.0",
-    "react-transition-group": "^2.9.0",
-    "@babel/core": "^7.6.0"
+    "react-transition-group": "^2.9.0"
   },
   "homepage": "http://tapetycytaty.pl",
   "devDependencies": {

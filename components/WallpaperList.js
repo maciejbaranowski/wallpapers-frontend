@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Link from "next/link";
 import CustomHead from "../components/CustomHead"
 import Wallpaper from "./Wallpaper";
@@ -13,20 +13,27 @@ class WallpaperList extends Component {
     wallpapersPerPage: 10,
     author: "",
     category: "",
-    wallpapersList: []
+    wallpapersList: [],
+    adminPassword: null
   }
   getNumberOfPages() {
     return this.props.wallpapersNumber / this.props.wallpapersPerPage;
   }
 
   getBasicUrl() {
-    if (!isEmptyString(this.props.searchPhrase)) {
-      return "/?searchPhrase=" + this.props.searchPhrase;
+    const createUrl = () => {
+      if (!isEmptyString(this.props.searchPhrase)) {
+        return "/?searchPhrase=" + this.props.searchPhrase;
+      }
+      if (!isEmptyString(this.props.author)) {
+        return "/?author=" + this.props.author;
+      }
+      return "/?category=" + this.props.category;
     }
-    if (!isEmptyString(this.props.author)) {
-      return "/?author=" + this.props.author;
+    if (this.props.adminPassword !== null) {
+      return "/admin/manage_database" + createUrl() + "&password=" + this.props.adminPassword;
     }
-    return "/?category=" + this.props.category;
+    return createUrl();
   }
 
   getNextPageButton() {
@@ -58,6 +65,13 @@ class WallpaperList extends Component {
     return null;
   }
 
+  conditionallyShowAdminOptions() {
+    if (this.props.adminPassword !== null) {
+      return <p>Usuń tapetę</p>;
+    }
+    return null;
+  }
+
   generateTitle = () => {
     if (!isEmptyString(this.props.category) && this.props.category != "all")
       return "Tapety na pulpit z kategorii: " + this.props.category;
@@ -78,7 +92,10 @@ class WallpaperList extends Component {
         {!this.props.dataFetched ? <LoadingPane /> : ""}
         <div className="row three-column">
           {this.props.wallpapersList.map((wallpaper, i) => {
-            return <Wallpaper key={i} data={wallpaper} index={i} />;
+            return <div key={i}>
+              <Wallpaper data={wallpaper} index={i} />
+              {this.conditionallyShowAdminOptions()}
+            </div>
           })}
           {this.conditionallyShowNothingFound()}
         </div>

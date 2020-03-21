@@ -6,6 +6,7 @@ const dev = process.env.NODE_DEV !== 'production'
 const nextApp = next({ dev })
 const handle = nextApp.getRequestHandler()
 const loader = require("./loader")
+const gm = require('gm')
 
 nextApp.prepare().then(() => {
     const app = express();
@@ -32,6 +33,27 @@ nextApp.prepare().then(() => {
       loader(req.query.author).then((data) => {
         res.send(data);
       }).catch(e => console.log(e));
+    })
+    app.get('/admin/generate*', (req,res) => {
+      const im = gm.subClass({imageMagick: true});
+      im(1920, 1080, "#ffffff00")
+      .fontSize(100)
+      .fill('black')
+      .drawText(30,1000,req.query.quote)      
+      //.shadow(100,1)
+      //.blur(40,5)
+      //.fill('white')
+      //.drawText(30,1000,req.query.quote)
+      .write(".\\static\\quote.png", () => {
+        im(`https://api.tapetycytaty.pl/img/${req.query.backgroundImage}`)
+        .resize(1920,1080)
+        .compose("Over")
+        .composite(".\\static\\quote.png")
+        .resize(1920 / 2, 1080 / 2) //temporary scaledown for easier testing
+        .write(".\\static\\output.jpeg", () => {
+          res.send(`/static/output.jpeg`)
+        });
+      })
     })
     app.get('/*', (req,res) => {
       return handle(req,res);

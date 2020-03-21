@@ -18,6 +18,13 @@ class DataProvider {
     });
   }
 
+  static getPlainImagesList() {
+    return axios.get(this.getApiUrl() + "getPlainImages.php", {
+      crossDomain: true,
+      params: {}
+    });
+  }
+
   static getWallpaper(index) {
     return axios.get(this.getApiUrl() + "getImage.php", {
       crossDomain: true,

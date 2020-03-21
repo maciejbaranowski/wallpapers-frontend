@@ -32,3 +32,16 @@
   width: 100%;
   bottom: 0px;
 }
+
+.image-choice {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+}
+
+.image-choice div {
+  margin: 5px;
+}
+
+.image-choice img {
+  width: 100%;
+}

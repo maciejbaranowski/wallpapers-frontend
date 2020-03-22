@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Axios from 'axios'
 import DataProvider from '../../components/DataProvider'
+import Rating from '../../components/Rating';
+import PopularCategories from '../../components/PopularCategories';
 
 const LoaderStepInputAuthor = (props) => {
   const [author, setAuthor] = useState("Mark Twain")
@@ -53,9 +55,28 @@ const LoaderStepProcessSingleImageChoice = props => {
     <span>Wybierz tło do tego cytatu:</span><br/>
     <div className="image-choice">
       {images.map(image => (
-        <div onClick={()=>props.onImageChoice(image)} key={image}><img src={`https://api.tapetycytaty.pl/img/${image}`}/></div>
+        <div onClick={()=>props.onImageChoice(image)} key={image}><img src={`https://api.tapetycytaty.pl/img_thumbnails/${image}`}/></div>
       ))}
     </div>
+  </div>;
+}
+
+const LoaderStepProcessSingleCategoryChoice = props => {
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    DataProvider.getCategoriesList().then((data) => {
+      const popularCategories = new PopularCategories();
+      setCategories(popularCategories.categories.concat(data.data));
+    });
+  }, []);
+  return <div>
+    <h3>{props.quote}</h3><br/>
+    <span>Wybierz kategorię do tego cytatu:</span><br/>
+    <ul>
+      {categories.map(category => (
+        <li className="btn btn-xs" onClick={()=>props.onChoice(category.id)} key={category.id}>{category.name}</li>
+      ))}
+    </ul>
   </div>;
 }
 
@@ -68,18 +89,50 @@ const LoaderStepProcessSingleConfirm = props => {
   }, []);
   return <div>
     <h3>{props.quote}</h3>
-    {!image ? <span>Ładowanie obrazu...</span> : <img src={`${image}?${performance.now()}`}/>}
-    <br/>
-    <button className="btn" onClick={() => {props.onNext();}}>Następny</button>
+    {!image ? <span>Ładowanie obrazu...</span> : <div>
+      <img src={`${image}?${performance.now()}`} className="full-width"/>
+      <br/>
+      <Rating
+        sumVotes={0}
+        numberOfVotes={0}
+        placeVote={i => {
+          props.onRate(image, i);
+        }}
+      />
+      </div>
+    }
+    
   </div>
 }
+
 const LoaderStepProcessSingle = (props) => {
   const [backgroundImage, setBackgroundImage] = useState(null);
+  const [category, setCategory] = useState(null);
   if (!backgroundImage) {
     return <LoaderStepProcessSingleImageChoice {...props} onImageChoice={(imagePath)=> {setBackgroundImage(imagePath)}}/>
-  } else {
-    return <LoaderStepProcessSingleConfirm {...props} backgroundImage={backgroundImage} onNext={() => {setBackgroundImage(null); props.onNext()}}/>
+  } 
+  if (!category) {
+    return <LoaderStepProcessSingleCategoryChoice {...props} onChoice={(category)=> {setCategory(category)}}/>
   }
+  return <LoaderStepProcessSingleConfirm {...props} 
+    backgroundImage={backgroundImage} 
+    onRate={(image, rating) => {
+      Axios.post(`/admin/postWallpaper?password=${props.adminPassword}`, 
+      {
+        data: {
+          image: image,
+          quote: props.quote,
+          category: category,
+          author: props.author,
+          rating: rating
+        }
+      }).then(()=>{
+        setBackgroundImage(null);
+        setCategory(null);      
+        props.onNext();
+      });
+    }
+  }/>
 };
 
 const LoaderStepProcessFinished = (props) => (
@@ -117,9 +170,14 @@ class LoadWallpapers extends React.Component {
     }
     if (this.state.selectedQuotes.length > 0) {
       const processedQuote = this.state.selectedQuotes[0];
-      return <LoaderStepProcessSingle onNext={()=> {
-        this.setState({selectedQuotes: this.state.selectedQuotes.slice(1)});
-      }} quote={processedQuote} adminPassword={this.props.adminPassword}/>
+      return <LoaderStepProcessSingle 
+        onNext={()=> {
+          this.setState({selectedQuotes: this.state.selectedQuotes.slice(1)});
+        }}
+        quote={processedQuote}
+        author={this.state.author}
+        adminPassword={this.props.adminPassword}
+      />
     }
     return <LoaderStepProcessFinished adminPassword={this.props.adminPassword}/>
   }

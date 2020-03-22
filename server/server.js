@@ -11,6 +11,7 @@ const gm = require('gm')
 nextApp.prepare().then(() => {
     const app = express();
     app.use(express.static('static'))
+    app.use(express.json());
     app.use('/admin/*', (req,res,next) => {
       axios.post("https://api.tapetycytaty.pl/api/auth.php", 
       null,
@@ -29,37 +30,49 @@ nextApp.prepare().then(() => {
         console.log(err);
       });
     })
-    app.get('/admin/quotes*', (req,res) => {
+    app.get('/admin/quotes*', (req, res) => {
       loader(req.query.author).then((data) => {
         res.send(data);
       }).catch(e => console.log(e));
     })
-    app.get('/admin/generate*', (req,res) => {
+    app.get('/admin/generate*', (req, res) => {
       const im = gm.subClass({imageMagick: true});
-      im(1920, 1080, "#ffffff00")
-      .fontSize(100)
+      const offset = 5;
+      im(1920, 1080, "#00000000")
+      .font(".\\static\\fonts\\Lobster-Regular.ttf", 60)
       .fill('black')
-      .drawText(30,1000,req.query.quote)      
-      //.shadow(100,1)
-      //.blur(40,5)
-      //.fill('white')
-      //.drawText(30,1000,req.query.quote)
+      .drawText(30+offset,1000+offset, req.query.quote)    
+      .drawText(30-offset,1000+offset, req.query.quote)    
+      .drawText(30+offset,1000-offset, req.query.quote)    
+      .drawText(30-offset,1000-offset, req.query.quote)    
+      .blur(20,5)
+      .fill('white')
+      .drawText(30,1000,req.query.quote)
       .write(".\\static\\quote.png", () => {
         im(`https://api.tapetycytaty.pl/img/${req.query.backgroundImage}`)
         .resize(1920,1080)
         .compose("Over")
         .composite(".\\static\\quote.png")
-        .resize(1920 / 2, 1080 / 2) //temporary scaledown for easier testing
+        .resize(1920, 1080)
         .write(".\\static\\output.jpeg", () => {
-          res.send(`/static/output.jpeg`)
+          im(`.\\static\\output.jpeg`)
+            .resize(1920 / 4)
+            .write(".\\static\\thumbnail.jpeg", () => {
+              res.send(`/static/output.jpeg`)
+            });
         });
       })
     })
+    app.post('/admin/postWallpaper', (req, res) => {
+      const [image, quote, category, author, rating] = req.body.data;
+
+      res.sendStatus(200);
+    });
     app.get('/*', (req,res) => {
       return handle(req,res);
-    })
+    });
     app.listen(PORT, err => {
         if (err) throw err;
         console.log(`Application ready at http://localhost:${PORT}`)
-    })
+    });
 })

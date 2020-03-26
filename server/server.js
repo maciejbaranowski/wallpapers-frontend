@@ -6,7 +6,7 @@ const dev = process.env.NODE_DEV !== 'production'
 const nextApp = next({ dev })
 const handle = nextApp.getRequestHandler()
 const loader = require("./loader")
-const gm = require('gm')
+const image_generator = require('./image_generator')
 
 nextApp.prepare().then(() => {
     const app = express();
@@ -35,38 +35,22 @@ nextApp.prepare().then(() => {
         res.send(data);
       }).catch(e => console.log(e));
     })
-    app.get('/admin/generate*', (req, res) => {
-      const im = gm.subClass({imageMagick: true});
-      const offset = 5;
-      im(1920, 1080, "#00000000")
-      .font(".\\static\\fonts\\Lobster-Regular.ttf", 60)
-      .fill('black')
-      .drawText(30+offset,1000+offset, req.query.quote)    
-      .drawText(30-offset,1000+offset, req.query.quote)    
-      .drawText(30+offset,1000-offset, req.query.quote)    
-      .drawText(30-offset,1000-offset, req.query.quote)    
-      .blur(20,5)
-      .fill('white')
-      .drawText(30,1000,req.query.quote)
-      .write(".\\static\\quote.png", () => {
-        im(`https://api.tapetycytaty.pl/img/${req.query.backgroundImage}`)
-        .resize(1920,1080)
-        .compose("Over")
-        .composite(".\\static\\quote.png")
-        .resize(1920, 1080)
-        .write(".\\static\\output.jpeg", () => {
-          im(`.\\static\\output.jpeg`)
-            .resize(1920 / 4)
-            .write(".\\static\\thumbnail.jpeg", () => {
-              res.send(`/static/output.jpeg`)
-            });
-        });
-      })
+    app.get('/admin/generate*', async (req, res) => {
+      const path = await image_generator(req.query.quote, req.query.backgroundImage, req.query.author);
+      res.send(path);
     })
     app.post('/admin/postWallpaper', (req, res) => {
-      const [image, quote, category, author, rating] = req.body.data;
-
-      res.sendStatus(200);
+      axios.post("https://api.tapetycytaty.pl/api/postWallpaper.php", null,
+      {
+        crossDomain: true,
+        body: {
+          ...req.body.data // {path, quote, category, author, rating}
+        }
+      }).then(()=>{
+        res.sendStatus(200);
+      }).catch((e)=>{
+        res.status(500).send(e);
+      });
     });
     app.get('/*', (req,res) => {
       return handle(req,res);

@@ -83,7 +83,7 @@ const LoaderStepProcessSingleCategoryChoice = props => {
 const LoaderStepProcessSingleConfirm = props => {
   const [image, setImage] = useState(null);
   useEffect(() => {
-    Axios.get(`/admin/generate?password=${props.adminPassword}&quote=${props.quote}&backgroundImage=${props.backgroundImage}`).then((data) => {
+    Axios.get(`/admin/generate?password=${props.adminPassword}&quote=${props.quote}&backgroundImage=${props.backgroundImage}&author=${props.author}`).then((data) => {
       setImage(data.data);
     });
   }, []);
@@ -120,7 +120,7 @@ const LoaderStepProcessSingle = (props) => {
       Axios.post(`/admin/postWallpaper?password=${props.adminPassword}`, 
       {
         data: {
-          image: image,
+          path: path,
           quote: props.quote,
           category: category,
           author: props.author,

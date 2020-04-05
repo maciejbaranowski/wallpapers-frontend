@@ -1,12 +1,14 @@
 const express = require('express')
 const next = require('next')
 const axios = require('axios')
+const fs = require('fs');
+const loader = require("./loader")
+const image_generator = require('./image_generator')
+
 const PORT = process.env.PORT || 3000
 const dev = process.env.NODE_DEV !== 'production'
 const nextApp = next({ dev })
 const handle = nextApp.getRequestHandler()
-const loader = require("./loader")
-const image_generator = require('./image_generator')
 
 nextApp.prepare().then(() => {
     const app = express();
@@ -40,16 +42,19 @@ nextApp.prepare().then(() => {
       res.send(path);
     })
     app.post('/admin/postWallpaper', (req, res) => {
-      axios.post("https://api.tapetycytaty.pl/api/postWallpaper.php", null,
+      axios.post("https://api.tapetycytaty.pl/api/postWallpaper.php",
       {
-        crossDomain: true,
-        body: {
-          ...req.body.data // {path, quote, category, author, rating}
-        }
-      }).then(()=>{
+        ...req.body.data, // {path, quote, category, author, rating}        
+      },
+      {
+        crossDomain: true
+      }).then((data)=>{
+        console.log(data);
+        fs.writeFileSync('.\\static\\new.jpeg', data.data)
         res.sendStatus(200);
       }).catch((e)=>{
-        res.status(500).send(e);
+        console.log(e);
+        res.status(500).send("");
       });
     });
     app.get('/*', (req,res) => {

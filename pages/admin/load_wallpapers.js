@@ -120,7 +120,7 @@ const LoaderStepProcessSingle = (props) => {
       Axios.post(`/admin/postWallpaper?password=${props.adminPassword}`, 
       {
         data: {
-          path: path,
+          path: image,
           quote: props.quote,
           category: category,
           author: props.author,

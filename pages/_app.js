@@ -3,7 +3,7 @@ import Navigation from "../components/Navigation";
 import {CopyrightFooter} from "../components/Static";
 import Router from "next/router"
 import {LoadingPane} from "../components/LoadingPane";
-import App, {Container} from "next/app"
+import App from "next/app"
 import {withRouter} from "next/router"
 
 import ReactGA from "react-ga";
@@ -78,7 +78,7 @@ class CustomApp extends App {
         <div className="well">
           {this.state.loading
             ? <LoadingPane/>
-          : <Container><Component {...pageProps}/></Container>}
+          : <Component {...pageProps}/>}
         </div>
         <CopyrightFooter/>
       </div>

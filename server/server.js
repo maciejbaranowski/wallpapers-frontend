@@ -4,7 +4,8 @@ const axios = require('axios')
 const crypto = require("crypto");
 const fs = require('fs');
 const loader = require("./loader")
-const image_generator = require('./image_generator')
+const image_generator = require('./image_generator');
+const path = require('path');
 
 const PORT = process.env.PORT || 3000
 const dev = process.env.NODE_DEV !== 'production'
@@ -13,6 +14,7 @@ const handle = nextApp.getRequestHandler()
 
 nextApp.prepare().then(() => {
     const app = express();
+    
     app.use(express.static('static'))
     app.use(express.json());
     // Deploy below once ready
@@ -59,9 +61,23 @@ nextApp.prepare().then(() => {
     //     res.send('OK')
     //   });
     // });
+    
+    app.get('/ads.txt', (req,res) => {
+      return res.sendFile('ads.txt', {
+        root: path.join(__dirname, '../static')
+      });
+    });
+    
+    app.get('/sitemap.txt', (req,res) => {
+      return res.sendFile('ads.txt', {
+        root: path.join(__dirname, '../static')
+      });
+    });
+
     app.get('/*', (req,res) => {
       return handle(req,res);
     });
+
     app.listen(PORT, err => {
         if (err) throw err;
         console.log(`Application ready at http://localhost:${PORT}`)

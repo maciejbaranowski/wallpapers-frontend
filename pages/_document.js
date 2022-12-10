@@ -16,9 +16,9 @@ class MyDocument extends Document {
                     enable_page_level_ads: true
               });` }}>
           </script>
-          <link href="/static/bootstrap.min.css" rel="stylesheet" />
-          <link href="/static/index.css" rel="stylesheet" />
-          <link href="/static/loader.css" rel="stylesheet" />
+          <link href="bootstrap.min.css" rel="stylesheet" />
+          <link href="index.css" rel="stylesheet" />
+          <link href="loader.css" rel="stylesheet" />
         </Head>
         <body>
           <Main />
